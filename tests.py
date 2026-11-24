@@ -9,7 +9,6 @@ from matrix.matrix import (
     spiral_traversal,
 )
 
-
 def test_parse_formatted_table():
     raw_data = """
     | 10 20 30 |
@@ -22,7 +21,6 @@ def test_parse_formatted_table():
         [70, 80, 90],
     ]
     assert parse_matrix(raw_data) == target
-
 
 def test_spiral_walk():
     grid = [
@@ -40,27 +38,25 @@ def test_spiral_walk():
     ]
     assert spiral_traversal(grid) == expected_sequence
 
+def test_spiral_walk_empty():
+    assert spiral_traversal([]) == []
 
 def test_single_element():
     assert spiral_traversal([[5]]) == [5]
 
-
 def test_empty_input_raises():
     with pytest.raises(MatrixFormatError):
         parse_matrix("")
-
 
 def test_rectangular_input_raises():
     data = "1 2 3\n4 5 6"
     with pytest.raises(MatrixFormatError):
         parse_matrix(data)
 
-
 def test_non_numeric_raises():
     data = "1 2\n3 abc"
     with pytest.raises(MatrixFormatError):
         parse_matrix(data)
-
 
 @pytest.mark.asyncio
 async def test_successful_download_and_parse():
@@ -72,7 +68,6 @@ async def test_successful_download_and_parse():
         actual_result = await get_matrix(target_url)
 
     assert actual_result == [1, 3, 4, 2]
-
 
 @pytest.mark.asyncio
 async def test_download_failure_raises():
